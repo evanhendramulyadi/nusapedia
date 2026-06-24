@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NusaPedia - Portal Literasi Budaya Indonesia Modern">
+    <title>NusaPedia</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/playfair-display@latest/latin-700.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/playfair-display@latest/latin-400.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/lora@latest/latin-400.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/lora@latest/latin-600.css">
+    <style>
+        /* CSS Variables for Beautiful Earthy Theme */
+        :root {
+            --primary-brown: #3E2723;
+            --secondary-brown: #5D4037;
+            --accent-gold: #C5A059;
+            --bg-ivory: #FCF8F2;
+            --bg-sand: #F3E9DC;
+            --text-dark: #2C1E15;
+            --text-light: #5C4D3C;
+            --shadow-sm: 0 4px 6px rgba(62, 39, 35, 0.05);
+            --shadow-md: 0 8px 16px rgba(62, 39, 35, 0.08);
+            --shadow-lg: 0 16px 24px rgba(62, 39, 35, 0.12);
+            --border-radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-ivory);
+            color: var(--text-dark);
+            line-height: 1.9;
+            overflow-x: hidden;
+            font-size: 1.15rem;
+            font-family: 'Lora', 'Georgia', serif;
+        }
+
+        h1, h2, h3, h4, .logo {
+            font-family: 'Playfair Display', 'Georgia', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Solid Brown Navbar Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--primary-brown);
+            border-bottom: 3px solid var(--accent-gold);
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 0;
+            box-shadow: 0 10px 30px rgba(62, 39, 35, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--bg-ivory);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent-gold);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--bg-sand);
+            transition: var(--transition);
+            position: relative;
+            padding: 0.2rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-gold);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn-lang {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--bg-sand);
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            font-family: 'Lora', serif;
+        }
+
+        .btn-lang:hover {
+            background: var(--accent-gold);
+            color: var(--primary-brown);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 28px;
+            height: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--bg-sand);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(135deg, rgba(62, 39, 35, 0.94) 0%, rgba(44, 28, 25, 0.92) 100%),
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23C5A059' stroke-width='0.8' stroke-opacity='0.4'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z'/%3E%3Ccircle cx='50' cy='50' r='12' stroke-width='1' stroke-opacity='0.5'/%3E%3Cpath d='M50 15 C62 15 62 35 50 50 C38 35 38 15 50 15 Z' stroke-width='0.7'/%3E%3Cpath d='M50 85 C62 85 62 65 50 50 C38 65 38 85 50 85 Z' stroke-width='0.7'/%3E%3Cpath d='M15 50 C15 62 35 62 50 50 C35 38 15 38 15 50 Z' stroke-width='0.7'/%3E%3Cpath d='M85 50 C85 62 65 62 50 50 C65 38 85 38 85 50 Z' stroke-width='0.7'/%3E%3Ccircle cx='50' cy='50' r='4' fill='%23C5A059' fill-opacity='0.3'/%3E%3Cpath d='M0 0 L10 10 M100 0 L90 10 M0 100 L10 90 M100 100 L90 90' stroke-width='0.5'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 80px 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            border-bottom: 6px solid var(--accent-gold);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            color: var(--bg-ivory);
+            z-index: 1;
+        }
+
+        .hero h1 {
+            color: var(--bg-ivory);
+            font-size: 3.8rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: var(--bg-sand);
+            font-size: 1.35rem;
+            margin-bottom: 0;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        section {
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        #tentang {
+            background-color: var(--bg-ivory);
+            border-bottom: 3px solid rgba(197, 160, 89, 0.2);
+        }
+
+        #budaya {
+            background-color: var(--bg-sand);
+            border-bottom: 3px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .stats {
+            background: linear-gradient(135deg, var(--primary-brown) 0%, #271714 100%);
+            color: var(--bg-ivory);
+            text-align: center;
+            border-top: 5px solid var(--accent-gold);
+            border-bottom: 5px solid var(--accent-gold);
+        }
+
+        .cta {
+            background-color: var(--bg-ivory);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 4.5rem;
+            position: relative;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title::after {
+            content: '♦ ⚜ ♦';
+            display: block;
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin: 1.2rem auto 0;
+            font-family: initial;
+            letter-spacing: 4px;
+        }
+
+        .article-box {
+            background: var(--bg-ivory);
+            padding: 4rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 4rem;
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            border-top: 6px solid var(--primary-brown);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .article-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            margin: 4px;
+            pointer-events: none;
+            border-radius: calc(var(--border-radius) - 4px);
+        }
+
+        .article-box:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-6px);
+            border-top-color: var(--accent-gold);
+        }
+
+        #budaya .article-box {
+            background: #FFFDFC;
+        }
+
+        .article-box h3 {
+            color: var(--primary-brown);
+            font-size: 2.1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 1.2rem;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-brown);
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--text-light);
+            margin-bottom: 1.8rem;
+            text-align: justify;
+        }
+
+        .cultural-list {
+            margin: 1.5rem 0;
+            padding-left: 1rem;
+        }
+
+        .cultural-list li {
+            position: relative;
+            list-style: none;
+            padding-left: 2rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-dark);
+            font-size: 1.15rem;
+        }
+
+        .cultural-list li::before {
+            content: '♦';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+
+        .cultural-list strong {
+            color: var(--primary-brown);
+            font-size: 1.2rem;
+        }
+
+        .stats .section-title {
+            color: var(--bg-ivory);
+        }
+
+        .stats .section-title::after {
+            color: var(--accent-gold);
+        }
+
+        .grid-6 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 3.5rem auto 0;
+        }
+
+        .stat-item {
+            padding: 2.5rem 2rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--accent-gold);
+        }
+
+        .stat-item h4 {
+            font-size: 3.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stat-item p {
+            color: var(--bg-sand);
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .cta {
+            background: var(--bg-sand);
+            text-align: center;
+            position: relative;
+        }
+
+        .btn-main {
+            display: inline-block;
+            background: var(--primary-brown);
+            color: var(--bg-ivory);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            border: 2px solid var(--primary-brown);
+            box-shadow: var(--shadow-md);
+            margin-top: 1.5rem;
+            font-family: 'Lora', serif;
+        }
+
+        .btn-main:hover {
+            background: transparent;
+            color: var(--primary-brown);
+            border-color: var(--primary-brown);
+            box-shadow: var(--shadow-lg);
+        }
+
+        footer {
+            background: #1C110F;
+            color: var(--bg-sand);
+            text-align: center;
+            padding: 2.5rem 2rem;
+            border-top: 2px solid rgba(197, 160, 89, 0.2);
+            font-size: 1rem;
+        }
+
+        footer p {
+            margin: 0;
+            color: inherit;
+            text-align: center;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 74px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 74px);
+                background: var(--primary-brown);
+                flex-direction: column;
+                justify-content: center;
+                gap: 3rem;
+                transition: var(--transition);
+                border-top: 2px solid rgba(197, 160, 89, 0.2);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.15rem;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .article-box {
+                padding: 2.5rem 1.8rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            body {
+                font-size: 1.05rem;
+            }
+
+            .stat-item h4 {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="mainHeader">
+        <div class="nav-container">
+            <a href="#home" class="logo" aria-label="NusaPedia Home">
+                Nusa<span>Pedia</span>
+            </a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link" data-i18n="navHome">Beranda</a></li>
+                    <li><a href="#tentang" class="nav-link" data-i18n="navAbout">Tentang</a></li>
+                    <li><a href="#budaya" class="nav-link" data-i18n="navCulture">Budaya Daerah</a></li>
+                    <li>
+                        <button class="btn-lang" id="langToggle" aria-label="Switch Language" data-i18n="langToggleText">EN</button>
+                    </li>
+                </ul>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content reveal">
+                <h1 data-i18n="heroTitle">Jelajahi Esensi Seni dan Budaya Nusantara</h1>
+                <p data-i18n="heroDesc">NusaPedia adalah ensiklopedia digital yang membawa Anda menyelami kedalaman filosofi rumah adat, gemulai tarian tradisional, hingga harmonisasi alat musik warisan leluhur Indonesia.</p>
+            </div>
+            <div class="scroll-indicator">▼</div>
+        </section>
+
+        <section id="tentang" class="reveal">
+            <div class="container">
+                <h2 class="section-title" data-i18n="aboutTitle">Filosofi NusaPedia</h2>
+                <div class="article-box">
+                    <p data-i18n="aboutPara1">NusaPedia didirikan dengan satu landasan pemikiran yang luhur: bahwa kebudayaan bukanlah sekadar sisa-sisa peradaban masa lalu, melainkan pondasi identitas yang menopang masa depan sebuah bangsa. Di tengah laju modernisasi yang begitu pesat, Indonesia sebagai negara kepulauan memendam mutiara tradisi di setiap sudut daerahnya. Mulai dari ukiran kayu pada dinding rumah adat, hingga setiap helai benang pada kain tenun tradisional, semuanya menyimpan narasi tentang hubungan manusia dengan Sang Creator, alam semesta, dan sesamanya.</p>
+                    <p data-i18n="aboutPara2">Melalui wadah digital ini, kami menyajikan teks-teks literasi panjang yang mengupas tuntas kekayaan budaya tersebut tanpa distraksi visual yang berlebihan. Kami percaya bahwa membaca secara mendalam adalah cara terbaik untuk meresapi makna filosofis dari tarian, alat musik, arsitektur, dan adat istiadat nusantara. Setiap paragraf yang kami susun ditujukan untuk membangkitkan kesadaran kolektif generasi muda agar terus melestarikan dan menghargai mahakarya warisan nenek moyang kita.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="budaya" class="reveal">
+            <div class="container">
+                <h2 class="section-title" data-i18n="cultureTitle">Lanskap Kesenian dan Tradisi</h2>
+
+                <div class="article-box">
+                    <h3 data-i18n="cultSub1">Rumah Adat: Arsitektur Kehidupan</h3>
+                    <p data-i18n="cultPara1">Rumah adat di Indonesia merepresentasikan kecerdasan spasial masyarakat agraris dan maritim di masa lampau. Bangunan-bangunan kuno ini dirancang selaras dengan iklim dan geografi setempat, menggunakan material alam murni tanpa perekat logam struktural modern. Berikut adalah beberapa manifestasi arsitektur tradisional nusantara yang sarat makna filosofis:</p>
+                    <ul class="cultural-list">
+                        <li><strong data-i18n="houseEx1">Rumah Gadang (Sumatera Barat):</strong> Atap melengkung runcing tajam menyerupai tanduk kerbau (gonjong) melambangkan hubungan spiritual yang intim dan sakral antara manusia dengan langit luas, sekaligus bentuk penghargaan terhadap hewan kerbau yang bersejarah bagi masyarakat Minangkabau.</li>
+                        <li><strong data-i18n="houseEx2">Tongkonan (Toraja, Sulawesi Selatan):</strong> Struktur atap megah melengkung menyerupai perahu merupakan bentuk penghormatan mendalam terhadap armada perahu para leluhur yang mengarungi samudra raya masa silam, berjejer menghadap utara sebagai simbol asal-usul kehidupan.</li>
+                        <li><strong data-i18n="houseEx3">Rumah Joglo (Jawa Tengah):</strong> Menampilkan desain atap berbentuk tajug yang disokong oleh empat tiang utama (soko guru), menggambarkan keselarasan vertikal dengan Sang Pencipta dan keselarasan horizontal sesama makhluk sosial.</li>
+                    </ul>
+                    <p data-i18n="cultPara1_end">Kekokohan bangunan-bangunan tanpa paku ini merupakan bukti nyata keandalan teknik rekayasa kayu tradisional yang teruji tahan gempa.</p>
+                </div>
+
+                <div class="article-box">
+                    <h3 data-i18n="cultSub2">Tarian Tradisional: Tubuh Sebagai Bahasa</h3>
+                    <p data-i18n="cultPara2">Seni tari tradisional di nusantara adalah jembatan ekspresi spiritual dan tatanan sosial masyarakat setempat, mengalirkan bahasa tubuh yang universal dan sarat simbolik luhur:</p>
+                    <ul class="cultural-list">
+                        <li><strong data-i18n="danceEx1">Tari Saman (Aceh):</strong> Menampilkan ritme tepukan tangan dan gerakan tubuh beruntun berkecepatan tinggi, melambangkan keteguhan iman, kedisiplinan beribadah, serta pentingnya semangat kebersamaan dan kekompakan komunitas.</li>
+                        <li><strong data-i18n="danceEx2">Tari Kecak (Bali):</strong> Dramatari kolosal unik tanpa musik instrumen yang mengandalkan ritme paduan suara vokal puluhan pria secara konsentris, merepresentasikan harmoni alam semesta dan perlindungan spiritual.</li>
+                        <li><strong data-i18n="danceEx3">Tari Jaipong (Jawa Barat):</strong> Menggabungkan keandalan gerak silat, ketukan kendang dinamis, serta keluwesan ekspresi keceriaan yang mencerminkan ketangguhan dan fleksibilitas wanita Sunda.</li>
+                    </ul>
+                    <p data-i18n="cultPara2_end">Hampir seluruh tarian tradisional ini berfungsi ganda, baik sebagai hiburan perayaan rakyat maupun ritual sakral penyambutan musim panen.</p>
+                </div>
+
+                <div class="article-box">
+                    <h3 data-i18n="cultSub3">Alat Musik Tradisional: Resonansi Harmoni Alam</h3>
+                    <p data-i18n="cultPara3">Melodi tradisional nusantara dirancang dengan memanfaatkan bahan-bahan alami yang tumbuh subur di kepulauan, melahirkan nada-nada meditatif dan dinamis:</p>
+                    <ul class="cultural-list">
+                        <li><strong data-i18n="musicEx1">Angklung (Jawa Barat):</strong> Alat musik dari bambu pilihan yang memancarkan getaran nada tunggal. Diperlukan kerja sama erat antarpemain untuk merangkai nada-nada tersebut menjadi sebuah harmoni lagu yang utuh dan indah.</li>
+                        <li><strong data-i18n="musicEx2">Sasando (Pulau Rote, NTT):</strong> Instrumen dawai petik beresonansi wadah daun lontar yang melengkung indah, melahirkan nada lembut mengalun seperti riak gelombang laut pesisir pantai selatan.</li>
+                        <li><strong data-i18n="musicEx3">Gamelan (Jawa & Bali):</strong> Perpaduan instrumen perkusi logam perunggu (gong, saron, kenong) yang bergetar selaras, memandu batin pendengarnya menuju kedamaian spiritual.</li>
+                    </ul>
+                </div>
+
+                <div class="article-box">
+                    <h3 data-i18n="cultSub4">Pakaian Adat: Simbol Identitas dan Kehormatan</h3>
+                    <p data-i18n="cultPara4">Pakaian adat mencerminkan tatanan moral, martabat, status sosial, dan harapan luhur yang dijahit rapi dalam helai-helai kain tenun tradisional nusantara:</p>
+                    <ul class="cultural-list">
+                        <li><strong data-i18n="clothEx1">Kebaya & Batik Sidomukti (Jawa):</strong> Kebaya anggun dipadukan jarik batik bercorak Sidomukti yang menyimbolkan pengharapan akan kehidupan baru yang sejahtera, damai, dan penuh kemakmuran berkat doa leluhur.</li>
+                        <li><strong data-i18n="clothEx2">Baju Bodo (Bugis, Sulawesi Selatan):</strong> Busana adat transparan dengan warna cerah yang masing-masing melambangkan tingkat usia, strata sosial, serta keanggunan sejati wanita Bugis-Makassar.</li>
+                        <li><strong data-i18n="clothEx3">Kain Ulos (Batak, Sumatera Utara):</strong> Kain sakral hasil tenunan benang emas dan perak yang dikalungkan dalam upacara siklus kehidupan (perkawinan, kelahiran, kematian) sebagai lambang perlindungan dan kehangatan kasih sayang.</li>
+                    </ul>
+                </div>
+
+                <div class="article-box">
+                    <h3 data-i18n="cultSub5">Bahasa Daerah: Jendela Cara Berpikir Bangsa</h3>
+                    <p data-i18n="cultPara5">Bahasa daerah adalah rahim dari tatanan etika sosial yang mengajarkan kearifan lokal, kesantunan bertutur kata, dan penyelarasan diri dengan masyarakat sekitar:</p>
+                    <ul class="cultural-list">
+                        <li><strong data-i18n="langEx1">Bahasa Jawa (Jawa Tengah & Timur):</strong> Memiliki struktur tingkatan komunikasi (Ngoko dan Krama) yang kompleks untuk menanamkan rasa hormat yang mendalam kepada orang tua, guru, maupun tamu.</li>
+                        <li><strong data-i18n="langEx2">Bahasa Sunda (Jawa Barat):</strong> Dituturkan dengan dinamika intonasi vokal yang lembut, ramah, dan menenangkan, merefleksikan watak masyarakat Sunda yang cinta damai dan kekeluargaan.</li>
+                        <li><strong data-i18n="langEx3">Bahasa Bugis (Sulawesi Selatan):</strong> Mengandung struktur bahasa yang tegas dan lugas, mewakili jiwa kepelautan, keteguhan prinsip harga diri, serta keberanian tinggi para pelaut ulung.</li>
+                    </ul>
+                </div>
+
+                <div class="article-box">
+                    <h3 data-i18n="cultSub6">Makanan Daerah: Jejak Tradisi dan Rempah-Rempah</h3>
+                    <p data-i18n="cultPara6">Kuliner daerah Indonesia adalah manuskrip rasa yang mencatat sejarah panjang interaksi maritim dunia melalui ramuan rempah yang diolah dengan ketekunan tinggi:</p>
+                    <ul class="cultural-list">
+                        <li><strong data-i18n="foodEx1">Rendang (Minangkabau, Sumatera Barat):</strong> Masakan daging sapi berselimut bumbu rempah pekat yang dimasak berjam-jam hingga karamelisasi santan kelapa menjadi hitam, melambangkan ketekunan dan kesabaran bermasyarakat.</li>
+                        <li><strong data-i18n="foodEx2">Gudeg (Yogyakarta):</strong> Perpaduan nangka muda, gula aren manis, dan santan kelapa yang dimasak perlahan di kuali tanah liat, melambangkan karakter hidup masyarakat Jawa yang harmonis, tenang, dan bersahaja.</li>
+                        <li><strong data-i18n="foodEx3">Papeda (Papua & Maluku):</strong> Bubur saripati sagu bertekstur kenyal disajikan hangat dengan ikan kuah kuning kaya kunyit, melambangkan ketergantungan hidup harmonis dengan pohon sagu sebagai anugerah hutan rimba raya.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats reveal">
+            <div class="container" style="max-width: 1200px;">
+                <h2 class="section-title" data-i18n="statTitle">Jejak Warisan Nusantara</h2>
+                <p data-i18n="statDesc" style="color: var(--bg-sand); max-width: 800px; margin: 0 auto 3rem; text-align: center;">Keberagaman budaya Indonesia adalah warisan agung yang harus dijaga dari generasi ke generasi.</p>
+                <div class="grid-6">
+                    <div class="stat-item">
+                        <h4 data-i18n="statNum1">3.000+</h4>
+                        <p data-i18n="statLbl1">Jenis Tarian Daerah</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4 data-i18n="statNum2">1.500+</h4>
+                        <p data-i18n="statLbl2">Gaya Rumah Adat</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4 data-i18n="statNum3">400+</h4>
+                        <p data-i18n="statLbl3">Alat Musik Khas</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4 data-i18n="statNum4">300+</h4>
+                        <p data-i18n="statLbl4">Pakaian Adat Khas</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4 data-i18n="statNum5">718</h4>
+                        <p data-i18n="statLbl5">Bahasa Daerah Aktif</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4 data-i18n="statNum6">5.000+</h4>
+                        <p data-i18n="statLbl6">Kuliner Tradisional</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta reveal">
+            <div class="container" style="text-align: center;">
+                <h2 data-i18n="ctaTitle" style="font-size: 2.5rem; margin-bottom: 1rem;">Lanjutkan Perjalanan Literasi Anda</h2>
+                <p data-i18n="ctaDesc" style="font-size: 1.25rem; margin-bottom: 2rem; text-align: center; max-width: 750px; margin-left: auto; margin-right: auto;">Membaca dan meresapi makna filosofis kebudayaan adalah bentuk pelestarian paling mendasar. Mari terus bersama-sama menjaga api peradaban nusantara tetap menyala.</p>
+                <a href="#budaya" class="btn-main" data-i18n="ctaBtn">Mulai Membaca Kembali</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026–Present ITEC (Information Technology Engineering Club). All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            id: {
+                navHome: "Beranda",
+                navAbout: "Tentang",
+                navCulture: "Budaya Daerah",
+                langToggleText: "EN",
+                heroTitle: "Jelajahi Esensi Seni dan Budaya Nusantara",
+                heroDesc: "NusaPedia adalah ensiklopedia digital yang membawa Anda menyelami kedalaman filosofi rumah adat, gemulai tarian tradisional, hingga harmonisasi alat musik warisan leluhur Indonesia.",
+                aboutTitle: "Filosofi NusaPedia",
+                aboutPara1: "NusaPedia didirikan dengan satu landasan pemikiran yang luhur: bahwa kebudayaan bukanlah sekadar sisa-sisa peradaban masa lalu, melainkan pondasi identitas yang menopang masa depan sebuah bangsa. Di tengah laju modernisasi yang begitu pesat, Indonesia sebagai negara kepulauan memendam mutiara tradisi di setiap sudut daerahnya. Mulai dari ukiran kayu pada dinding rumah adat, hingga setiap helai benang pada kain tenun tradisional, semuanya menyimpan narasi tentang hubungan manusia dengan Sang Creator, alam semesta, dan sesamanya.",
+                aboutPara2: "Melalui wadah digital ini, kami menyajikan teks-teks literasi panjang yang mengupas tuntas kekayaan budaya tersebut tanpa distraksi visual yang berlebihan. Kami percaya bahwa membaca secara mendalam adalah cara terbaik untuk meresapi makna filosofis dari tarian, alat musik, arsitektur, dan adat istiadat nusantara. Setiap paragraf yang kami susun ditujukan untuk membangkitkan kesadaran kolektif generasi muda agar terus melestarikan dan menghargai mahakarya warisan nenek moyang kita.",
+                cultureTitle: "Lanskap Kesenian dan Tradisi",
+                cultSub1: "Rumah Adat: Arsitektur Kehidupan",
+                cultPara1: "Rumah adat di Indonesia merepresentasikan kecerdasan spasial masyarakat agraris dan maritim di masa lampau. Bangunan-bangunan kuno ini dirancang selaras dengan iklim dan geografi setempat, menggunakan material alam murni tanpa perekat logam struktural modern. Berikut adalah beberapa manifestasi arsitektur tradisional nusantara yang sarat makna filosofis:",
+                houseEx1: "Rumah Gadang (Sumatera Barat):",
+                houseEx1_text: " Atap melengkung runcing tajam menyerupai tanduk kerbau (gonjong) melambangkan hubungan spiritual yang intim dan sakral antara manusia dengan langit luas, sekaligus bentuk penghargaan terhadap hewan kerbau yang bersejarah bagi masyarakat Minangkabau.",
+                houseEx2: "Tongkonan (Toraja, Sulawesi Selatan):",
+                houseEx2_text: " Struktur atap megah melengkung menyerupai perahu merupakan bentuk penghormatan mendalam terhadap armada perahu para leluhur yang mengarungi samudra raya masa silam, berjejer menghadap utara sebagai simbol asal-usul kehidupan.",
+                houseEx3: "Rumah Joglo (Jawa Tengah):",
+                houseEx3_text: " Menampilkan desain atap berbentuk tajug yang disokong oleh empat tiang utama (soko guru), menggambarkan keselarasan vertikal dengan Sang Pencipta dan keselarasan horizontal sesama makhluk sosial.",
+                cultPara1_end: "Kekokohan bangunan-bangunan tanpa paku ini merupakan bukti nyata keandalan teknik rekayasa kayu tradisional yang teruji tahan gempa.",
+                cultSub2: "Tarian Tradisional: Tubuh Sebagai Bahasa",
+                cultPara2: "Seni tari tradisional di nusantara adalah jembatan ekspresi spiritual dan tatanan sosial masyarakat setempat, mengalirkan bahasa tubuh yang universal dan sarat simbolik luhur:",
+                danceEx1: "Tari Saman (Aceh):",
+                danceEx1_text: " Menampilkan ritme tepukan tangan dan gerakan tubuh beruntun berkecepatan tinggi, melambangkan keteguhan iman, kedisiplinan beribadah, serta pentingnya semangat kebersamaan dan kekompakan komunitas.",
+                danceEx2: "Tari Kecak (Bali):",
+                danceEx2_text: " Dramatari kolosal unik tanpa musik instrumen yang mengandalkan ritme paduan suara vokal puluhan pria secara konsentris, merepresentasikan harmoni alam semesta dan perlindungan spiritual.",
+                danceEx3: "Tari Jaipong (Jawa Barat):",
+                danceEx3_text: " Menggabungkan keandalan gerak silat, ketukan kendang dinamis, serta keluwesan ekspresi keceriaan yang mencerminkan ketangguhan dan fleksibilitas wanita Sunda.",
+                cultPara2_end: "Hampir seluruh tarian tradisional ini berfungsi ganda, baik sebagai hiburan perayaan rakyat maupun ritual sakral penyambutan musim panen.",
+                cultSub3: "Alat Musik Tradisional: Resonansi Harmoni Alam",
+                cultPara3: "Melodi tradisional nusantara dirancang dengan memanfaatkan bahan-bahan alami yang tumbuh subur di kepulauan, melahirkan nada-nada meditatif dan dinamis:",
+                musicEx1: "Angklung (Jawa Barat):",
+                musicEx1_text: " Alat musik dari bambu pilihan yang memancarkan getaran nada tunggal. Diperlukan kerja sama erat antarpemain untuk merangkai nada-nada tersebut menjadi sebuah harmoni lagu yang utuh dan indah.",
+                musicEx2: "Sasando (Pulau Rote, NTT):",
+                musicEx2_text: " Instrumen dawai petik beresonansi wadah daun lontar yang melengkung indah, melahirkan nada lembut mengalun seperti riak gelombang laut pesisir pantai selatan.",
+                musicEx3: "Gamelan (Jawa & Bali):",
+                musicEx3_text: " Perpaduan instrumen perkusi logam perunggu (gong, saron, kenong) yang bergetar selaras, memandu batin pendengarnya menuju kedamaian spiritual.",
+                cultSub4: "Pakaian Adat: Simbol Identitas dan Kehormatan",
+                cultPara4: "Pakaian adat mencerminkan tatanan moral, martabat, status sosial, dan harapan luhur yang dijahit rapi dalam helai-helai kain tenun tradisional nusantara:",
+                clothEx1: "Kebaya & Batik Sidomukti (Jawa):",
+                clothEx1_text: " Kebaya anggun dipadukan jarik batik bercorak Sidomukti yang menyimbolkan pengharapan akan kehidupan baru yang sejahtera, damai, dan penuh kemakmuran berkat doa leluhur.",
+                clothEx2: "Baju Bodo (Bugis, Sulawesi Selatan):",
+                clothEx2_text: " Busana adat transparan dengan warna cerah yang masing-masing melambangkan tingkat usia, strata sosial, serta keanggunan sejati wanita Bugis-Makassar.",
+                clothEx3: "Kain Ulos (Batak, Sumatera Utara):",
+                clothEx3_text: " Kain sakral hasil tenunan benang emas dan perak yang dikalungkan dalam upacara siklus kehidupan (perkawinan, kelahiran, kematian) sebagai lambang perlindungan dan kehangatan kasih sayang.",
+                cultSub5: "Bahasa Daerah: Jendela Cara Berpikir Bangsa",
+                cultPara5: "Bahasa daerah adalah rahim dari tatanan etika sosial yang mengajarkan kearifan lokal, kesantunan bertutur kata, dan penyelarasan diri dengan masyarakat sekitar:",
+                langEx1: "Bahasa Jawa (Jawa Tengah & Timur):",
+                langEx1_text: " Memiliki struktur tingkatan komunikasi (Ngoko dan Krama) yang kompleks untuk menanamkan rasa hormat yang mendalam kepada orang tua, guru, maupun tamu.",
+                langEx2: "Bahasa Sunda (Jawa Barat):",
+                langEx2_text: " Dituturkan dengan dinamika intonasi vokal yang lembut, ramah, dan menenangkan, merefleksikan watak masyarakat Sunda yang cinta damai dan kekeluargaan.",
+                langEx3: "Bahasa Bugis (Sulawesi Selatan):",
+                langEx3_text: " Mengandung struktur bahasa yang tegas dan lugas, mewakili jiwa kepelautan, keteguhan prinsip harga diri, serta keberanian tinggi para pelaut ulung.",
+                cultSub6: "Makanan Daerah: Jejak Tradisi dan Rempah-Rempah",
+                cultPara6: "Kuliner daerah Indonesia adalah manuskrip rasa yang mencatat sejarah panjang interaksi maritim dunia melalui ramuan rempah yang diolah dengan ketekunan tinggi:",
+                foodEx1: "Rendang (Minangkabau, Sumatera Barat):",
+                foodEx1_text: " Masakan daging sapi berselimut bumbu rempah pekat yang dimasak berjam-jam hingga karamelisasi santan kelapa menjadi hitam, melambangkan ketekunan dan kesabaran bermasyarakat.",
+                foodEx2: "Gudeg (Yogyakarta):",
+                foodEx2_text: " Perpaduan nangka muda, gula aren manis, dan santan kelapa yang dimasak perlahan di kuali tanah liat, melambangkan karakter hidup masyarakat Jawa yang harmonis, tenang, dan bersahaja.",
+                foodEx3: "Papeda (Papua & Maluku):",
+                foodEx3_text: " Bubur saripati sagu bertekstur kenyal disajikan hangat dengan ikan kuah kuning kaya kunyit, melambangkan ketergantungan hidup harmonis dengan pohon sagu sebagai anugerah hutan rimba raya.",
+                statTitle: "Jejak Warisan Nusantara",
+                statDesc: "Keberagaman budaya Indonesia adalah warisan agung yang harus dijaga dari generasi ke generasi.",
+                statNum1: "3.000+",
+                statLbl1: "Jenis Tarian Daerah",
+                statNum2: "1.500+",
+                statLbl2: "Gaya Rumah Adat",
+                statNum3: "400+",
+                statLbl3: "Alat Musik Khas",
+                statNum4: "300+",
+                statLbl4: "Pakaian Adat Khas",
+                statNum5: "718",
+                statLbl5: "Bahasa Daerah Aktif",
+                statNum6: "5.000+",
+                statLbl6: "Kuliner Tradisional",
+                ctaTitle: "Lanjutkan Perjalanan Literasi Anda",
+                ctaDesc: "Membaca dan meresapi makna filosofis kebudayaan adalah bentuk pelestarian paling mendasar. Mari terus bersama-sama menjaga api peradaban nusantara tetap menyala.",
+                ctaBtn: "Mulai Membaca Kembali"
+            },
+            en: {
+                navHome: "Home",
+                navAbout: "About",
+                navCulture: "Cultures",
+                langToggleText: "ID",
+                heroTitle: "Explore the Essence of Archipelago's Art and Culture",
+                heroDesc: "NusaPedia is a digital encyclopedia that brings you to dive into the philosophical depths of traditional houses, the grace of traditional dances, to the harmony of ancestral musical instruments.",
+                aboutTitle: "The Philosophy of NusaPedia",
+                aboutPara1: "NusaPedia was founded on one noble principle: that culture is not merely the remnants of past civilizations, but the foundational identity that supports the future of a nation. Amidst the rapid pace of modernization, Indonesia, as an archipelagic country, hides pearls of tradition in every corner of its regions. From the wood carvings on the walls of traditional houses to every thread on traditional woven fabrics, everything holds narratives about human relationships with the Creator, the universe, and each other.",
+                aboutPara2: "Through this digital platform, we present long-form literacy texts that thoroughly explore this cultural wealth without excessive visual distractions. We believe that reading deeply is the best way to absorb the philosophical meanings of the archipelago's dances, musical instruments, architecture, and customs. Every paragraph we compose aims to awaken the collective consciousness of the younger generation to continue preserving and appreciating the masterpieces of our ancestors' heritage.",
+                cultureTitle: "Arts and Traditions Landscape",
+                cultSub1: "Traditional Houses: Architecture of Life",
+                cultPara1: "Traditional houses in Indonesia represent the spatial intelligence of past agrarian and maritime societies. These ancient structures were designed in alignment with local climate and geography, using pure natural materials without modern structural metal fasteners. Below are some manifestations of archipelagic traditional architecture steeped in philosophical meaning:",
+                houseEx1: "Rumah Gadang (West Sumatra):",
+                houseEx1_text: " Its sharply curved pointed roofs resembling buffalo horns (gonjong) symbolize an intimate, sacred spiritual connection between humans and the vast sky, as well as a tribute to the historical water buffalo.",
+                houseEx2: "Tongkonan (Toraja, South Sulawesi):",
+                houseEx2_text: " A magnificent curved roof structure resembling a boat, built as a deep homage to the ancestor fleet that once sailed the ancient oceans, aligned northwards as a symbol of life's origin.",
+                houseEx3: "Rumah Joglo (Central Java):",
+                houseEx3_text: " Featuring a tajug-shaped roof design supported by four main pillars (soko guru), reflecting vertical alignment with the Creator and horizontal harmony among fellow social beings.",
+                cultPara1_end: "The resilience of these nail-less buildings is a tangible proof of reliable traditional timber-framing engineering tested to withstand tropical earthquakes.",
+                cultSub2: "Traditional Dances: The Body as Language",
+                cultPara2: "Traditional dance in the archipelago is a bridge of spiritual expression and social order of local communities, conveying a universal and highly symbolic body language:",
+                danceEx1: "Saman Dance (Aceh):",
+                danceEx1_text: " Displays rapid, continuous hand-clapping and chest-slapping rhythms, symbolizing steadfast faith, disciplined worship, and the importance of togetherness and community cohesion.",
+                danceEx2: "Kecak Dance (Bali):",
+                danceEx2_text: " A unique colossal dance-drama without instrumental music, relying on the concentric vocal harmonies of dozens of men chanting, representing cosmic harmony and spiritual protection.",
+                danceEx3: "Jaipong Dance (West Java):",
+                danceEx3_text: " Blends martial arts prowess, dynamic drumming beats, and joyful expressions of movement, showcasing the strength and versatility of Sundanese women.",
+                cultPara2_end: "Almost all traditional dances serve a dual purpose, as both popular folk entertainment and sacred harvest ritual celebrations.",
+                cultSub3: "Traditional Musical Instruments: Resonance of Natural Harmony",
+                cultPara3: "Traditional melodies of the archipelago are crafted by utilizing natural resources thriving on mother earth, producing sweet, meditative and dynamic tones:",
+                musicEx1: "Angklung (West Java):",
+                musicEx1_text: " An instrument made from premium bamboos emitting a single vibration tone. Close teamwork among players is required to organize these individual tones into a complete melody.",
+                musicEx2: "Sasando (Rote Island, NTT):",
+                musicEx2_text: " A plucked string instrument featuring a curved lontar palm leaf resonator, producing tranquil, meditative tones like southern coastal wave ripples.",
+                musicEx3: "Gamelan (Java & Bali):",
+                musicEx3_text: " A majestic fusion of bronze and brass percussion instruments (gongs, saron, kenong) vibrating in harmony, guiding the listener's inner soul toward spiritual tranquility.",
+                cultSub4: "Traditional Clothing: Symbol of Identity and Honor",
+                cultPara4: "Traditional attire reflects the moral fabric, dignity, social standing, and noble hopes woven into the textile layers of archipelagic traditional weaves:",
+                clothEx1: "Kebaya & Batik Sidomukti (Java):",
+                clothEx1_text: " Elegant kebaya paired with Sidomukti batik pattern that symbolizes hopes of a prosperous, peaceful, and blessed life guided by ancestral prayers.",
+                clothEx2: "Baju Bodo (Bugis, South Sulawesi):",
+                clothEx2_text: " A sheer, brightly colored traditional tunic denoting age, social strata, and the true elegance of Bugis-Makassar women.",
+                clothEx3: "Ulos fabric (Batak, North Sumatra):",
+                clothEx3_text: " A sacred weave with gold and silver threads gifted during lifecycle rites (marriages, births, deaths) as a token of protective warmth and affection.",
+                cultSub5: "Regional Languages: Window into the Mind of the Nation",
+                cultPara5: "Regional languages are the cradles of social ethics teaching local wisdom, respectful communication, and interpersonal alignment:",
+                langEx1: "Javanese Language (Central & East Java):",
+                langEx1_text: " Features an intricate structure of speech levels (Ngoko and Krama) to instill profound respect for elders, teachers, and guests.",
+                langEx2: "Sundanese Language (West Java):",
+                langEx2_text: " Spoken with soft, gentle vocal dynamics, reflecting the friendly and affectionate character of the Sundanese people.",
+                langEx3: "Bugis Language (South Sulawesi):",
+                langEx3_text: " Portrays a firm and direct speaking style, representing seafaring grit, strict honor codes, and the immense courage of maritime masters.",
+                cultSub6: "Regional Food: Traces of Tradition and Spices",
+                cultPara6: "Indonesian regional culinary arts are manuscripts of taste capturing long oceanic trade relations through highly sophisticated spice blends:",
+                foodEx1: "Rendang (Minangkabau, West Sumatra):",
+                foodEx1_text: " Beef slowly caramelized in rich spices and coconut milk for hours until dark, representing community perseverance and patience.",
+                foodEx2: "Gudeg (Yogyakarta):",
+                foodEx2_text: " A fusion of young jackfruit, palm sugar, and coconut milk simmered in clay pots, reflecting the peaceful, simple, and harmonious Javanese way of life.",
+                foodEx3: "Papeda (Papua & Maluku):",
+                foodEx3_text: " Chewy sago starch served warm with yellow fish soup rich in turmeric, representing coastal synergy with the rich forest sagos as a vital life gift.",
+                statTitle: "Archipelago's Heritage Traces",
+                statDesc: "Indonesia's cultural diversity is a magnificent legacy that must be preserved from generation to generation.",
+                statNum1: "3,000+",
+                statLbl1: "Regional Dance Types",
+                statNum2: "1,500+",
+                statLbl2: "Traditional House Styles",
+                statNum3: "400+",
+                statLbl3: "Unique Musical Instruments",
+                statNum4: "300+",
+                statLbl4: "Traditional Attire Styles",
+                statNum5: "718",
+                statLbl5: "Active Regional Languages",
+                statNum6: "5,000+",
+                statLbl6: "Traditional Cuisines",
+                ctaTitle: "Continue Your Literacy Journey",
+                ctaDesc: "Reading and absorbing the philosophical meanings of culture is the ultimate form of preservation. Let us keep the fire of our archipelago's civilization burning bright together.",
+                ctaBtn: "Start Reading Again"
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const langToggleBtn = document.getElementById('langToggle');
+            let currentLang = localStorage.getItem('nusapedia_lang') || 'id';
+            applyLanguage(currentLang);
+
+            langToggleBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'id' ? 'en' : 'id';
+                applyLanguage(currentLang);
+            });
+
+            function applyLanguage(lang) {
+                document.documentElement.lang = lang;
+                localStorage.setItem('nusapedia_lang', lang);
+
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
+                            element.placeholder = translations[lang][key];
+                        } else {
+                            element.textContent = translations[lang][key];
+                        }
+                    }
+                });
+
+                const listKeys = ['houseEx1','houseEx2','houseEx3','danceEx1','danceEx2','danceEx3','musicEx1','musicEx2','musicEx3','clothEx1','clothEx2','clothEx3','langEx1','langEx2','langEx3','foodEx1','foodEx2','foodEx3'];
+                listKeys.forEach(id => updateListText(id, lang));
+            }
+
+            function updateListText(id, lang) {
+                const element = document.querySelector(`[data-i18n="${id}"]`);
+                if (element && translations[lang][id] && translations[lang][id + '_text']) {
+                    const parent = element.parentElement;
+                    if (parent) {
+                        parent.innerHTML = '';
+                        const strong = document.createElement('strong');
+                        strong.setAttribute('data-i18n', id);
+                        strong.textContent = translations[lang][id];
+                        parent.appendChild(strong);
+                        parent.appendChild(document.createTextNode(translations[lang][id + '_text']));
+                    }
+                }
+            }
+
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                const isExpanded = hamburger.classList.contains('active');
+                hamburger.setAttribute('aria-expanded', isExpanded);
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // Header scroll effect
+            const mainHeader = document.getElementById('mainHeader');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    mainHeader.classList.add('scrolled');
+                } else {
+                    mainHeader.classList.remove('scrolled');
+                }
+            });
+
+            const reveals = document.querySelectorAll('.reveal');
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealObserver.observe(reveal);
+            });
+
+            // Animated counter for stats
+            const statItems = document.querySelectorAll('.stat-item h4');
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateStats();
+                        statsObserver.disconnect();
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            const statsSection = document.querySelector('.stats');
+            if (statsSection) {
+                statsObserver.observe(statsSection);
+            }
+
+            function animateStats() {
+                statItems.forEach(item => {
+                    const finalText = item.textContent;
+                    const numMatch = finalText.match(/[\d,.]+/);
+                    if (!numMatch) return;
+                    
+                    const numStr = numMatch[0].replace(/[,.]/g, '');
+                    const finalNum = parseInt(numStr);
+                    const hasComma = numMatch[0].includes(',');
+                    const hasDot = numMatch[0].includes('.');
+                    const suffix = finalText.replace(numMatch[0], '');
+                    
+                    let current = 0;
+                    const duration = 2000;
+                    const steps = 60;
+                    const increment = finalNum / steps;
+                    const stepTime = duration / steps;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= finalNum) {
+                            current = finalNum;
+                            clearInterval(timer);
+                        }
+                        
+                        let displayNum = Math.floor(current);
+                        if (hasComma) {
+                            displayNum = displayNum.toLocaleString('en-US');
+                        } else if (hasDot) {
+                            displayNum = displayNum.toLocaleString('id-ID');
+                        }
+                        
+                        item.textContent = displayNum + suffix;
+                    }, stepTime);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
