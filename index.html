@@ -5,20 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="NusaPedia - Portal Literasi Budaya Indonesia Modern">
     <title>NusaPedia</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/playfair-display@latest/latin-700.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/playfair-display@latest/latin-400.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/lora@latest/latin-400.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/fonts/lora@latest/latin-600.css">
     <style>
         /* CSS Variables for Beautiful Earthy Theme */
         :root {
-            --primary-brown: #3E2723;
-            --secondary-brown: #5D4037;
-            --accent-gold: #C5A059;
-            --bg-ivory: #FCF8F2;
-            --bg-sand: #F3E9DC;
-            --text-dark: #2C1E15;
-            --text-light: #5C4D3C;
+            --primary-brown: #3E2723; /* Deep Royal Brown */
+            --secondary-brown: #5D4037; /* Warm Terracotta-Brown */
+            --accent-gold: #C5A059; /* Antique Gold */
+            --bg-ivory: #FCF8F2; /* Soft Cream / Ivory */
+            --bg-sand: #F3E9DC; /* Warm Taupe / Sand */
+            --text-dark: #2C1E15; /* Charcoal Brown */
+            --text-light: #5C4D3C; /* Muted Earthy Grey */
             --shadow-sm: 0 4px 6px rgba(62, 39, 35, 0.05);
             --shadow-md: 0 8px 16px rgba(62, 39, 35, 0.08);
             --shadow-lg: 0 16px 24px rgba(62, 39, 35, 0.12);
@@ -26,10 +22,12 @@
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
         }
 
         html {
@@ -42,16 +40,73 @@
             line-height: 1.9;
             overflow-x: hidden;
             font-size: 1.15rem;
-            font-family: 'Lora', 'Georgia', serif;
-        }
-
-        h1, h2, h3, h4, .logo {
-            font-family: 'Playfair Display', 'Georgia', serif;
         }
 
         a {
             text-decoration: none;
             color: inherit;
+        }
+
+        /* Desktop Mode Required Overlay */
+        #desktop-force-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #3E2723 0%, #211210 100%);
+            color: #FCF8F2;
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .overlay-content {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            border: 1px solid #C5A059;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .overlay-content h2 {
+            color: #C5A059;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .overlay-content p {
+            color: #F3E9DC;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .desktop-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .instructions {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 0.95rem;
+            border-left: 4px solid #C5A059;
+        }
+
+        .instructions ol {
+            padding-left: 1.2rem;
+        }
+
+        .instructions li {
+            margin-bottom: 0.5rem;
         }
 
         /* Solid Brown Navbar Styles */
@@ -65,11 +120,6 @@
             z-index: 1000;
             box-shadow: var(--shadow-md);
             transition: var(--transition);
-        }
-
-        header.scrolled {
-            padding: 0;
-            box-shadow: 0 10px 30px rgba(62, 39, 35, 0.2);
         }
 
         .nav-container {
@@ -86,6 +136,7 @@
             font-weight: 700;
             color: var(--bg-ivory);
             letter-spacing: -0.5px;
+            font-family: 'Georgia', serif;
         }
 
         .logo span {
@@ -137,7 +188,6 @@
             font-weight: bold;
             font-size: 0.9rem;
             transition: var(--transition);
-            font-family: 'Lora', serif;
         }
 
         .btn-lang:hover {
@@ -145,6 +195,7 @@
             color: var(--primary-brown);
         }
 
+        /* Hamburger Menu */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -165,7 +216,7 @@
             border-radius: 2px;
         }
 
-        /* Hero Section */
+        /* Hero Section with Intense Batik Background Pattern */
         .hero {
             height: 100vh;
             min-height: 600px;
@@ -192,7 +243,6 @@
             font-size: 3.8rem;
             margin-bottom: 2rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-            line-height: 1.2;
         }
 
         .hero p {
@@ -202,26 +252,13 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--accent-gold);
-            font-size: 1.5rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-        }
-
+        /* --- Section Separation and Visual Borders --- */
         section {
             padding: 8rem 2rem;
             position: relative;
         }
 
+        /* Clear Distinction Between Sections */
         #tentang {
             background-color: var(--bg-ivory);
             border-bottom: 3px solid rgba(197, 160, 89, 0.2);
@@ -258,6 +295,7 @@
             letter-spacing: -0.5px;
         }
 
+        /* Decorative Separator Motif */
         .section-title::after {
             content: '♦ ⚜ ♦';
             display: block;
@@ -268,6 +306,7 @@
             letter-spacing: 4px;
         }
 
+        /* Literary Scroll/Card Layout */
         .article-box {
             background: var(--bg-ivory);
             padding: 4rem;
@@ -280,6 +319,7 @@
             transition: var(--transition);
         }
 
+        /* Inner ornamental border */
         .article-box::before {
             content: '';
             position: absolute;
@@ -296,6 +336,7 @@
             border-top-color: var(--accent-gold);
         }
 
+        /* Customizing background of article box in sand section for better contrast */
         #budaya .article-box {
             background: #FFFDFC;
         }
@@ -321,6 +362,7 @@
             text-align: justify;
         }
 
+        /* Structured List/Points */
         .cultural-list {
             margin: 1.5rem 0;
             padding-left: 1rem;
@@ -349,6 +391,7 @@
             font-size: 1.2rem;
         }
 
+        /* Statistics Section styles (Expanded Grid) */
         .stats .section-title {
             color: var(--bg-ivory);
         }
@@ -384,7 +427,6 @@
             color: var(--accent-gold);
             margin-bottom: 0.6rem;
             font-weight: 700;
-            font-family: 'Playfair Display', serif;
         }
 
         .stat-item p {
@@ -394,6 +436,7 @@
             margin-bottom: 0;
         }
 
+        /* Call To Action Button Styles */
         .cta {
             background: var(--bg-sand);
             text-align: center;
@@ -413,7 +456,6 @@
             border: 2px solid var(--primary-brown);
             box-shadow: var(--shadow-md);
             margin-top: 1.5rem;
-            font-family: 'Lora', serif;
         }
 
         .btn-main:hover {
@@ -423,6 +465,7 @@
             box-shadow: var(--shadow-lg);
         }
 
+        /* Footer */
         footer {
             background: #1C110F;
             color: var(--bg-sand);
@@ -438,6 +481,7 @@
             text-align: center;
         }
 
+        /* Scroll Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -449,6 +493,7 @@
             transform: translateY(0);
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
@@ -503,37 +548,29 @@
             body {
                 font-size: 1.05rem;
             }
-
-            .stat-item h4 {
-                font-size: 2.8rem;
-            }
-
-#mobileWarning{
-    display:none;
-}
-
-@media (max-width:768px){
-    #mobileWarning{
-        display:block;
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100vh;
-        background:#3E2723;
-        color:white;
-        z-index:99999;
-        text-align:center;
-        padding:100px 20px;
-        font-size:1.2rem;
-    }
-}
         }
     </style>
 </head>
 <body>
 
-    <header id="mainHeader">
+    <!-- Overlay Pemblokir Mode Mobile -->
+    <div id="desktop-force-overlay">
+        <div class="overlay-content">
+            <span class="desktop-icon">🖥️</span>
+            <h2>Mode Desktop Diperlukan</h2>
+            <p>Maaf, situs NusaPedia dirancang khusus untuk pengalaman literasi mendalam pada tampilan layar besar. Silakan aktifkan Mode Desktop di ponsel Anda untuk melanjutkan.</p>
+            <div class="instructions">
+                <strong>Cara mengaktifkan:</strong>
+                <ol>
+                    <li>Ketuk ikon <strong>titik tiga (⋮)</strong> atau <strong>kompas (Aa)</strong> di pojok browser Anda.</li>
+                    <li>Cari dan centang pilihan <strong>"Situs Desktop"</strong> atau <strong>"Minta Situs Web Desktop"</strong>.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header & Navbar (Solid Brown Theme) -->
+    <header>
         <div class="nav-container">
             <a href="#home" class="logo" aria-label="NusaPedia Home">
                 Nusa<span>Pedia</span>
@@ -556,15 +593,17 @@
         </div>
     </header>
 
+    <!-- Main Content -->
     <main>
+        <!-- Hero Section (Dedicated Batik Landing Page) -->
         <section id="home" class="hero">
             <div class="hero-content reveal">
                 <h1 data-i18n="heroTitle">Jelajahi Esensi Seni dan Budaya Nusantara</h1>
                 <p data-i18n="heroDesc">NusaPedia adalah ensiklopedia digital yang membawa Anda menyelami kedalaman filosofi rumah adat, gemulai tarian tradisional, hingga harmonisasi alat musik warisan leluhur Indonesia.</p>
             </div>
-            <div class="scroll-indicator">▼</div>
         </section>
 
+        <!-- Tentang Section -->
         <section id="tentang" class="reveal">
             <div class="container">
                 <h2 class="section-title" data-i18n="aboutTitle">Filosofi NusaPedia</h2>
@@ -575,10 +614,12 @@
             </div>
         </section>
 
+        <!-- Budaya Daerah Section -->
         <section id="budaya" class="reveal">
             <div class="container">
                 <h2 class="section-title" data-i18n="cultureTitle">Lanskap Kesenian dan Tradisi</h2>
 
+                <!-- Rumah Adat -->
                 <div class="article-box">
                     <h3 data-i18n="cultSub1">Rumah Adat: Arsitektur Kehidupan</h3>
                     <p data-i18n="cultPara1">Rumah adat di Indonesia merepresentasikan kecerdasan spasial masyarakat agraris dan maritim di masa lampau. Bangunan-bangunan kuno ini dirancang selaras dengan iklim dan geografi setempat, menggunakan material alam murni tanpa perekat logam struktural modern. Berikut adalah beberapa manifestasi arsitektur tradisional nusantara yang sarat makna filosofis:</p>
@@ -590,6 +631,7 @@
                     <p data-i18n="cultPara1_end">Kekokohan bangunan-bangunan tanpa paku ini merupakan bukti nyata keandalan teknik rekayasa kayu tradisional yang teruji tahan gempa.</p>
                 </div>
 
+                <!-- Tarian Tradisional -->
                 <div class="article-box">
                     <h3 data-i18n="cultSub2">Tarian Tradisional: Tubuh Sebagai Bahasa</h3>
                     <p data-i18n="cultPara2">Seni tari tradisional di nusantara adalah jembatan ekspresi spiritual dan tatanan sosial masyarakat setempat, mengalirkan bahasa tubuh yang universal dan sarat simbolik luhur:</p>
@@ -601,6 +643,7 @@
                     <p data-i18n="cultPara2_end">Hampir seluruh tarian tradisional ini berfungsi ganda, baik sebagai hiburan perayaan rakyat maupun ritual sakral penyambutan musim panen.</p>
                 </div>
 
+                <!-- Alat Musik Tradisional -->
                 <div class="article-box">
                     <h3 data-i18n="cultSub3">Alat Musik Tradisional: Resonansi Harmoni Alam</h3>
                     <p data-i18n="cultPara3">Melodi tradisional nusantara dirancang dengan memanfaatkan bahan-bahan alami yang tumbuh subur di kepulauan, melahirkan nada-nada meditatif dan dinamis:</p>
@@ -611,6 +654,7 @@
                     </ul>
                 </div>
 
+                <!-- Pakaian Adat -->
                 <div class="article-box">
                     <h3 data-i18n="cultSub4">Pakaian Adat: Simbol Identitas dan Kehormatan</h3>
                     <p data-i18n="cultPara4">Pakaian adat mencerminkan tatanan moral, martabat, status sosial, dan harapan luhur yang dijahit rapi dalam helai-helai kain tenun tradisional nusantara:</p>
@@ -621,6 +665,7 @@
                     </ul>
                 </div>
 
+                <!-- Bahasa Daerah -->
                 <div class="article-box">
                     <h3 data-i18n="cultSub5">Bahasa Daerah: Jendela Cara Berpikir Bangsa</h3>
                     <p data-i18n="cultPara5">Bahasa daerah adalah rahim dari tatanan etika sosial yang mengajarkan kearifan lokal, kesantunan bertutur kata, dan penyelarasan diri dengan masyarakat sekitar:</p>
@@ -631,6 +676,7 @@
                     </ul>
                 </div>
 
+                <!-- Makanan Daerah -->
                 <div class="article-box">
                     <h3 data-i18n="cultSub6">Makanan Daerah: Jejak Tradisi dan Rempah-Rempah</h3>
                     <p data-i18n="cultPara6">Kuliner daerah Indonesia adalah manuskrip rasa yang mencatat sejarah panjang interaksi maritim dunia melalui ramuan rempah yang diolah dengan ketekunan tinggi:</p>
@@ -643,6 +689,7 @@
             </div>
         </section>
 
+        <!-- Statistik Section (Expanded with 6 Cultural Metrics) -->
         <section class="stats reveal">
             <div class="container" style="max-width: 1200px;">
                 <h2 class="section-title" data-i18n="statTitle">Jejak Warisan Nusantara</h2>
@@ -676,6 +723,7 @@
             </div>
         </section>
 
+        <!-- CTA Section -->
         <section class="cta reveal">
             <div class="container" style="text-align: center;">
                 <h2 data-i18n="ctaTitle" style="font-size: 2.5rem; margin-bottom: 1rem;">Lanjutkan Perjalanan Literasi Anda</h2>
@@ -685,10 +733,12 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <p>© 2026–Present ITEC (Information Technology Engineering Club). All Rights Reserved.</p>
     </footer>
 
+    <!-- JavaScript -->
     <script>
         const translations = {
             id: {
@@ -852,6 +902,32 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
+            /* --- 0. Force Desktop Mode Function --- */
+            function checkDesktopMode() {
+                const overlay = document.getElementById('desktop-force-overlay');
+                
+                // Mendeteksi user agent mobile (HP/Tablet)
+                const isMobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                
+                // Mendeteksi apakah layar sentuh dan berukuran layar mobile standar (max-width breakpoint)
+                // Jika user agent mobile, tapi lebar layar besar (berkat fitur 'Desktop Site' browser), anggap sebagai desktop.
+                const isMobileLayout = window.matchMedia("(max-width: 768px)").matches;
+
+                // Jika dibuka di perangkat mobile DAN layoutnya masih berukuran mobile (artinya mode desktop browser belum diaktifkan)
+                if (isMobileUserAgent && isMobileLayout) {
+                    overlay.style.display = 'flex';
+                    document.body.style.overflow = 'hidden'; // Kunci scroll halaman asli
+                } else {
+                    overlay.style.display = 'none';
+                    document.body.style.overflow = ''; // Kembalikan scroll normal jika sudah masuk mode desktop
+                }
+            }
+
+            // Jalankan deteksi saat halaman dimuat dan ketika orientasi/layar berubah
+            checkDesktopMode();
+            window.addEventListener('resize', checkDesktopMode);
+
+            /* --- 1. Language Handling (i18n) --- */
             const langToggleBtn = document.getElementById('langToggle');
             let currentLang = localStorage.getItem('nusapedia_lang') || 'id';
             applyLanguage(currentLang);
@@ -876,25 +952,25 @@
                     }
                 });
 
-                const listKeys = ['houseEx1','houseEx2','houseEx3','danceEx1','danceEx2','danceEx3','musicEx1','musicEx2','musicEx3','clothEx1','clothEx2','clothEx3','langEx1','langEx2','langEx3','foodEx1','foodEx2','foodEx3'];
-                listKeys.forEach(id => updateListText(id, lang));
+                // Update text segments for lists
+                const items = ['houseEx1','houseEx2','houseEx3','danceEx1','danceEx2','danceEx3','musicEx1','musicEx2','musicEx3','clothEx1','clothEx2','clothEx3','langEx1','langEx2','langEx3','foodEx1','foodEx2','foodEx3'];
+                items.forEach(item => updateListText(item, lang));
             }
 
             function updateListText(id, lang) {
                 const element = document.querySelector(`[data-i18n="${id}"]`);
                 if (element && translations[lang][id] && translations[lang][id + '_text']) {
+                    element.textContent = translations[lang][id];
                     const parent = element.parentElement;
                     if (parent) {
                         parent.innerHTML = '';
-                        const strong = document.createElement('strong');
-                        strong.setAttribute('data-i18n', id);
-                        strong.textContent = translations[lang][id];
-                        parent.appendChild(strong);
+                        parent.appendChild(element);
                         parent.appendChild(document.createTextNode(translations[lang][id + '_text']));
                     }
                 }
             }
 
+            /* --- 2. Hamburger Menu --- */
             const hamburger = document.getElementById('hamburger');
             const navMenu = document.getElementById('navMenu');
             const navLinks = document.querySelectorAll('.nav-link');
@@ -914,16 +990,7 @@
                 });
             });
 
-            // Header scroll effect
-            const mainHeader = document.getElementById('mainHeader');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    mainHeader.classList.add('scrolled');
-                } else {
-                    mainHeader.classList.remove('scrolled');
-                }
-            });
-
+            /* --- 3. Scroll Reveal Animation --- */
             const reveals = document.querySelectorAll('.reveal');
             const revealOptions = {
                 threshold: 0.15,
@@ -942,65 +1009,7 @@
             reveals.forEach(reveal => {
                 revealObserver.observe(reveal);
             });
-
-            // Animated counter for stats
-            const statItems = document.querySelectorAll('.stat-item h4');
-            const statsObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateStats();
-                        statsObserver.disconnect();
-                    }
-                });
-            }, { threshold: 0.3 });
-
-            const statsSection = document.querySelector('.stats');
-            if (statsSection) {
-                statsObserver.observe(statsSection);
-            }
-
-            function animateStats() {
-                statItems.forEach(item => {
-                    const finalText = item.textContent;
-                    const numMatch = finalText.match(/[\d,.]+/);
-                    if (!numMatch) return;
-                    
-                    const numStr = numMatch[0].replace(/[,.]/g, '');
-                    const finalNum = parseInt(numStr);
-                    const hasComma = numMatch[0].includes(',');
-                    const hasDot = numMatch[0].includes('.');
-                    const suffix = finalText.replace(numMatch[0], '');
-                    
-                    let current = 0;
-                    const duration = 2000;
-                    const steps = 60;
-                    const increment = finalNum / steps;
-                    const stepTime = duration / steps;
-                    
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= finalNum) {
-                            current = finalNum;
-                            clearInterval(timer);
-                        }
-                        
-                        let displayNum = Math.floor(current);
-                        if (hasComma) {
-                            displayNum = displayNum.toLocaleString('en-US');
-                        } else if (hasDot) {
-                            displayNum = displayNum.toLocaleString('id-ID');
-                        }
-                        
-                        item.textContent = displayNum + suffix;
-                    }, stepTime);
-                });
-            }
         });
-
-<div id="mobileWarning">
-    Website ini dirancang untuk tampilan desktop.
-    Silakan aktifkan Mode Desktop pada browser Anda.
-</div>
     </script>
 </body>
 </html>
